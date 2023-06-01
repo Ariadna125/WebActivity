@@ -3,12 +3,16 @@ import { Form, Link } from "@remix-run/react";
 import { db } from "../services/index";
 import { genres } from "../components/genres";
 
+//Agregamos el componente de géneros.
+
 <genres />;
 
+//Hacemos la petición de los datos del formulario.
 export async function action({ request }) {
   const formData = await request.formData();
   const body = Object.fromEntries(formData.entries());
 
+  //Creamos un nuevo libro.
   await db.book.create({
     data: {
       title: body.title,
@@ -16,10 +20,10 @@ export async function action({ request }) {
       genre: body.genre,
     },
   });
-
+  //Redirigimos a la página principal.
   return redirect("/");
 }
-
+//Mostramos el formulario.
 export default function () {
   return (
     <div className="flex justify-center items-center h-screen">

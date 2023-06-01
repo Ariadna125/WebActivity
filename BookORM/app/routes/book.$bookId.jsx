@@ -3,6 +3,8 @@ import { redirect } from "@remix-run/node";
 import { db } from "../services/index";
 import { genres } from "../components/genres";
 
+//Cargamos los daros de un libro en relación a su ID.
+
 export async function loader({ params }) {
   const id = parseInt(params.bookId);
   const book = await db.book.findFirst({
@@ -10,12 +12,13 @@ export async function loader({ params }) {
       id: id,
     },
   });
-
+  //Devuelve el libro encontrado en un objeto.
   return {
     data: book,
   };
 }
 
+//Actualizamos los datos del libro y redirigimos a la página principal.
 export async function action({ request, params }) {
   const formData = await request.formData();
   const body = Object.fromEntries(formData.entries());
@@ -25,11 +28,12 @@ export async function action({ request, params }) {
   const bookId = parseInt(params.bookId);
   console.log(bookId);
 
-  // update and redirect to index
+  //Actualizamos los datos del libro.
   await db.book.update({
     where: {
       id: bookId,
     },
+    //Parametros a actualizar.
     data: {
       title: body.title,
       author: body.author,
@@ -37,8 +41,11 @@ export async function action({ request, params }) {
     },
   });
 
+  //Redirigimos a la página principal.
   return redirect(`/`);
 }
+
+//Mostramos los datos del libro en un formulario.
 
 export default function () {
   /** @type {Awaited<ReturnType<typeof Loader>>} */
