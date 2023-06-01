@@ -1,7 +1,7 @@
 import { useLoaderData, useNavigation, Form, Link } from "@remix-run/react";
 import { redirect } from "@remix-run/node";
 import { db } from "../services/index";
-import { genres } from "./create";
+import { genres } from "../components/genres";
 
 export async function loader({ params }) {
   const id = parseInt(params.bookId);

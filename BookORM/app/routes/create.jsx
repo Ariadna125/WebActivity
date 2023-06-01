@@ -1,21 +1,9 @@
 import { redirect } from "@remix-run/node";
 import { Form, Link } from "@remix-run/react";
 import { db } from "../services/index";
+import { genres } from "../components/genres";
 
-export const genres = [
-  "Action and Adventure",
-  "Classics",
-  "Comic Book or Graphic Novel",
-  "Detective and Mystery",
-  "Fantasy",
-  "Historical Fiction",
-  "Horror",
-  "Literary Fiction",
-  "Romance",
-  "Science Fiction (Sci-Fi)",
-  "Short Stories",
-  "Suspense and Thrillers",
-];
+<genres />;
 
 export async function action({ request }) {
   const formData = await request.formData();
